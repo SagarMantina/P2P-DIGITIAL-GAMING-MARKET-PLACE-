@@ -138,11 +138,8 @@ Welcome to the **Gaming E-Commerce Platform**! This application provides a robus
 - `POST /downloadgame` - Game download
 
 ```
-
 ## ⚙️ Installation
-
-
-   ```
+```
 1. Clone the repository:
    ```bash
     git clone https://github.com/SagarMantina/P2P-DIGITIAL-GAMING-MARKET-PLACE-.git
