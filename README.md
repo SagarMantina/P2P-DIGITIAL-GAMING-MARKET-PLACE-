@@ -141,11 +141,13 @@ Welcome to the **Gaming E-Commerce Platform**! This application provides a robus
 
 ## ⚙️ Installation
 
+
+   ```
 1. Clone the repository:
    ```bash
-   git clone https://github.com/SagarMantina/P2P-DIGITIAL-GAMING-MARKET-PLACE-.git
+    git clone https://github.com/SagarMantina/P2P-DIGITIAL-GAMING-MARKET-PLACE-.git
    ```
-
+   
 2. Install dependencies:
    ```bash
    npm install
