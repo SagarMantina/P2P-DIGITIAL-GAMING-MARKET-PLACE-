@@ -8,8 +8,10 @@ const game_details = require("./models/gameschema");
 const register = require("./models/accountschema");
 const {connecttomongodb}=require( './models/connect')
 const Message = require("./models/messageschema");
+const env = require("dotenv").config();
 
-connecttomongodb("mongodb://localhost:27017/p2pnr")
+
+connecttomongodb(process.env.MONGO_URI)
   .then(async () => {
     console.log("DB CONNECTED");
 
@@ -39,28 +41,6 @@ function readDataFromJSONFile(filename) {
     });
   });
 }
-
-// to add the games to the database uncomment below one  and comment above code and run only once. then undo the changes 
-
-// connecttomongodb('mongodb://localhost:27017/user').then(async () => {
-
-// try {
-//   const filePath = path.join(__dirname, 'models', 'games.json');
-//   const data = await  readDataFromJSONFile(filePath);
-//   await Promise.all(data.map(async (gameData) => {
-//     const game = new game_details(gameData);
-//     await game.save();
-//   }));
-//   console.log("DB CONNECTED");
-//   console.log("Data saved successfully to games collection !");
-// } catch (error) {
-//   console.error("Error reading or saving data:", error);
-// } 
-// })
-// .catch(() => {
-//   console.log("Failed to Connect");
-// });
-
 
 app.use(cookie_parser());
 app.use(express.urlencoded({ extended: true }));
