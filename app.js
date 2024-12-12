@@ -9,12 +9,36 @@ const register = require("./models/accountschema");
 const {connecttomongodb}=require( './models/connect')
 const Message = require("./models/messageschema");
 
-connecttomongodb('mongodb://localhost:27017/user').then(() => {
-  console.log("DB CONNECTED");
-})
-.catch(() => {
-  console.log("Failed to Connect");
-});
+connecttomongodb("mongodb://localhost:27017/p2pnr")
+  .then(async () => {
+    console.log("DB CONNECTED");
+
+    const count = await game_details.countDocuments();
+    if (count === 0) {
+      const filePath = path.join(__dirname, "models", "games.json");
+      const data = await readDataFromJSONFile(filePath);
+      await Promise.all(data.map(async (gameData) => {
+        const game = new game_details(gameData);
+        await game.save();
+      }));
+      console.log("Data saved successfully to games collection!");
+    } else {
+      console.log(`Data already exists in game_details collection (${count} documents). No new data added.`);
+    }
+  })
+  .catch((err) => {
+    console.error("Failed to connect to MongoDB:", err);
+  });
+
+// Read JSON file utility
+function readDataFromJSONFile(filename) {
+  return new Promise((resolve, reject) => {
+    fs.readFile(filename, "utf8", (err, data) => {
+      if (err) reject(err);
+      else resolve(JSON.parse(data));
+    });
+  });
+}
 
 // to add the games to the database uncomment below one  and comment above code and run only once. then undo the changes 
 
